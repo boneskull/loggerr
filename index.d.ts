@@ -1,28 +1,19 @@
-/**
- * NodeJS.WritableStream "Like"
- *
- * We only call .write in this one form
- */
-interface WritableStreamLike {
-  write(chunk: any, encoding: 'utf8', callback?: (error: Error | null | undefined) => void): boolean;
-}
-
 type DefaultStreams = readonly [
-  emergency: WritableStreamLike,
-  alert: WritableStreamLike,
-  critical: WritableStreamLike,
-  error: WritableStreamLike,
-  warning: WritableStreamLike,
-  notice: WritableStreamLike,
-  info: WritableStreamLike,
-  debug: WritableStreamLike,
+  emergency: DefaultLoggerr.WritableStreamLike,
+  alert: DefaultLoggerr.WritableStreamLike,
+  critical: DefaultLoggerr.WritableStreamLike,
+  error: DefaultLoggerr.WritableStreamLike,
+  warning: DefaultLoggerr.WritableStreamLike,
+  notice: DefaultLoggerr.WritableStreamLike,
+  info: DefaultLoggerr.WritableStreamLike,
+  debug: DefaultLoggerr.WritableStreamLike,
 ]
 
 type DefaultOptions = Readonly<{
   level: LoggerrConstructor['WARNING'];
   formatter: DefaultLoggerr.FormatterFunction;
   streams: DefaultStreams;
-  debugStream?: WritableStreamLike
+  debugStream?: DefaultLoggerr.WritableStreamLike
 }>;
 
 /**
@@ -48,6 +39,15 @@ interface LoggerrConstructor {
 }
 
 declare namespace DefaultLoggerr {
+  /**
+ * NodeJS.WritableStream "Like"
+ *
+ * We only call .write in this one form
+ */
+  interface WritableStreamLike {
+    write(chunk: any, encoding: 'utf8', callback?: (error: Error | null | undefined) => void): boolean;
+  }
+  
   /**
    * Builtin formatters
    */
